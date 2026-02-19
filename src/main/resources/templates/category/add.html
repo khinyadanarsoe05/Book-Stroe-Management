@@ -1,0 +1,28 @@
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{include/header :: header}"></head>
+
+<body>
+    <div class="container mt-5">
+        <div th:insert="~{include/nav :: nav}"></div>
+        <div class="col-md-6 offset-3 mt-2" >
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">Create Category</h3>
+         
+                <form th:action="@{/admin/category/add}" method="post">
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Category Name</label>
+                    <input type="text" name="name"  class="form-control" id="exampleFormControlInput1" required >
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Add Category</button>
+                    </div>
+                </form>
+        </div>
+            </div>
+        </div>
+        
+    </div>

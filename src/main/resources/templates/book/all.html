@@ -1,0 +1,52 @@
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{include/header :: header}"></head>
+
+<body>
+    <div class="container mt-5">
+        <div th:insert="~{include/nav :: nav}"></div>
+        <div class="d-flex justify-content-between">
+            <h1 class="text-primary text-center btn-sm">All Book</h1>
+            <div class="d-flex justify-content-between">
+               <div sec:authorize="hasRole('ADMIN')" >   <a th:href="@{/admin/book/add}" class="btn btn-primary  text-center btn-sm"><i class="fa fa-plus"></i>Add</a></div>
+                  <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter Book
+                        </button>
+                        <ul class="dropdown-menu">
+                                    <li th:each="cat :${categories}" ><a class="dropdown-item" th:text="${cat.name}" th:href="@{/book/filter/{id}(id=${cat.id})}"></a></li>
+                                    <li ><a class="dropdown-item"  th:href="@{/book}">ALL</a></li>
+                                    
+                                </ul>
+                     </div>
+        
+            </div>
+          
+        </div>
+        
+       
+            <div class="row g-3">
+                <div class="col-md-3" th:each="book :${books}">
+                    <div class="card h-100 " >
+                        <img th:src="@{/images/{img}(img=${book.coverImageUrl})}" 
+     class="card-img-top" alt="Book Cover" height="120" width="20px">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${book.title}"></h5>
+                            <span >Author  :</span><span th:text="${book.author}"></span><br>
+                             <span class="text-secondary">Category  :  </span><span th:text="${book.category.name}" class="text-primary"> </span><br>
+                            <span class="text-secondary">Price  :  </span ><span th:text="${book.price}"class="text-primary"> Kyats</span><br>
+                            <span class="text-secondary">Stock  :  </span><span th:text="${book.stock}" class="text-primary"> </span><br>
+                            
+                           <span>Description  :</span> <p class="card-text" th:text="${book.description}"></p>
+                             <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/book/edit/{id}(id=${book.id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                            <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/book/drop/{id}(id=${book.id})}"  class="btn btn-danger"><i class="fa fa-trash"></i></a>                        </div>
+                    </div>
+                </div>
+                </div>
+             </div>
+        
+    </div>
+</body>
+</html>

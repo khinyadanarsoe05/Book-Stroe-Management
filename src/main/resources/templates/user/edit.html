@@ -1,0 +1,55 @@
+
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{include/header :: header}"></head>
+
+<body>
+    <div class="container mt-5">
+        <div th:insert="~{include/nav :: nav}"></div>
+          <div class="row">
+            <div class="col-md-6">
+                <table class="table caption-top table-bordered">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="role :${roles}"  th:if="${!userRoles.contains(role)}">
+                            <th scope="row">1</th>
+                            <td th:text="${role.name}">ADMIN Role</td>
+                            <td>
+                                <a th:href="@{/admin/user/edit/add/{uid}/{rid}(uid=${userId},rid=${role.id})}" class="btn btn-success"><i class="fa fa-plus"></i></a>        
+                            </td>
+                        </tbody>
+                </table>
+            </div>
+             <div class="col-md-6">
+                <table class="table caption-top table-bordered">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="userRole :${userRoles}">
+                            <th scope="row">1</th>
+                            <td th:text="${userRole.name}">ADMIN Role</td>
+                            <td>
+                                <a th:href="@{/admin/user/edit/remove/{uid}/{rid}(uid=${userId},rid=${userRole.id})}" class="btn btn-danger"><i class="fa fa-remove"></i></a>        
+                            </td>
+                        </tbody>
+                </table>
+            </div>
+            
+    
+    </div>
+    </div>
+</body>
+</html>

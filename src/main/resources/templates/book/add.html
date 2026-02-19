@@ -1,0 +1,58 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{include/header :: header}"></head>
+
+<body>
+    <div class="container mt-5">
+        <div th:insert="~{include/nav :: nav}"></div>
+         <div class="col-md-6 offset-3">
+                <form th:action="@{/admin/book/add}" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Book Title</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" required name="title">
+                    </div>
+                   
+
+                    <select class="form-select" name="categoryId">
+    <option value="">-- Select Category --</option>
+    <option th:each="cat : ${categories}"
+            th:value="${cat.id}"
+            th:text="${cat.name}">
+    </option>
+</select>
+
+
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="author">
+                    </div>
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Publiction Date</label>
+                    <input type="date" name="publicationDate" class="form-control" id="exampleFormControlInput1" >
+                    </div>
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Price</label>
+                    <input type="number" name="price" class="form-control" id="exampleFormControlInput1" >
+                    </div>
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Eenter Stock</label>
+                    <input type="number" name="stock" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    <div class="mb-3">
+                    <label for="formFileSm" class="form-label">Book Cover</label>
+                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="coverImage">
+                    </div>
+                    <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Add Book</button>
+                    </div>
+            </form>
+            </div>
+        
+    </div>
+</body>
+</html>

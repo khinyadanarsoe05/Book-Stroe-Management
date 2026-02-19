@@ -1,0 +1,57 @@
+
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{include/header :: header}"></head>
+
+<body>
+    <div class="container mt-5">
+        <div th:insert="~{include/nav :: nav}"></div>
+         <div class="col-md-6 offset-3">
+    <form th:action="@{/admin/book/edit/{id}(id=${book.id})}" method="post" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Book Title</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" required name="title" th:value="${book.title}">
+                    </div>
+<select class="form-select" name="categoryId" required>
+    <option value="">-- Select Category --</option>
+    <option th:each="cat : ${categories}"
+            th:value="${cat.id}"
+            th:text="${cat.name}"
+            th:selected="${cat.id == book.category.id}">
+    </option>
+</select>
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="author" th:value="${book.author}">
+                    </div>
+                
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Price</label>
+                    <input type="number" name="price" th:value="${book.price}" class="form-control" id="exampleFormControlInput1" >
+                    </div>
+                    <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Eenter Stock</label>
+                    <input type="number" name="stock" th:value="${book.stock}" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                    <label for="formFileSm" class="form-label">Book Cover</label>
+                    [[${book.description}]] <img th:src="@{/images/{img}(img=${book.coverImageUrl})}" 
+     class="card-img-top" alt="Book Cover" height="80%" width="20px">
+                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="coverImage">
+                    </div>
+                    <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">[[${book.description}]]</textarea>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Edit Book</button>
+                    </div>
+            </form>
+            </div>
+        
+    </div>
+</body>
+</html>
